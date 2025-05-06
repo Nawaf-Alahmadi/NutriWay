@@ -50,11 +50,12 @@ def contact_us_view(request: HttpRequest) -> HttpResponse:
 
 
 def contact_messages(request : HttpRequest) -> HttpResponse:
+    
     if not request.user.is_authenticated:
         messages.error(request, "You must be logged in to access this page.", "alert-danger")
         return redirect('accounts:login_view')
     if request.user.is_staff:
-        messages_list = ContactUs.objects.all().order_by('-created_at')
+        messages_list = ContactUs.objects.filter(status="Pending").order_by('-created_at')
         return render(request, 'supports/contact_messages.html', {'messages_list': messages_list})
     else:
         messages.error(request, "You are not authorized to access this page", "alert-danger")
