@@ -18,11 +18,7 @@
     {% endif %}
     
     <p><strong>Type:</strong> {{ plan.plan_type }}</p>
-    <p><strong>Price:</strong><img alt="Unicode 0x20C1.svg"
-      src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Unicode_0x20C1.svg/120px-Unicode_0x20C1.svg.png"
-      decoding="async" width="30px" class="mw-file-element"
-      srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Unicode_0x20C1.svg/180px-Unicode_0x20C1.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Unicode_0x20C1.svg/240px-Unicode_0x20C1.svg.png 2x"
-      data-file-width="16" data-file-height="16">{{plan.price | floatformat:0}} / per month</p>
+    <p><strong>Price:</strong> {{ plan.price }} ﷼</p>
     <form method="get" action="{% url 'payments:subscription_summary' plan.id %}">
         <label for="duration" class="form-label">Select Duration</label>
         <select name="duration" class="form-select mb-3" required>
@@ -42,3 +38,6 @@
 </div>
 </div>
 {% endblock %}
+<div class="container mt-5">
+
+  </div>

@@ -28,23 +28,104 @@
     </div>
     <div class="mt-4 text-center">
       <nav>
-        <ul class="pagination justify-content-center">
+        <ul class="pagination justify-content-center align-items-center">
+
+          {# First page arrow #}
+          {% if page_obj.number > 1 %}
+            <li class="page-item-1 icon">
+              <a class="page-link-1" href="?Subscription_page=1{% if selected_filter %}&filter={{ selected_filter }}{% endif %}{% if selected_type %}&type={{ selected_type }}{% endif %}">&laquo;</a>
+            </li>
+          {% endif %}
+        
+          {# Previous page arrow #}
           {% if page_obj.has_previous %}
-            <li class="page-item">
-              <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            <li class="page-item-1 icon">
+              <a class="page-link-1" href="?Subscription_page={{ page_obj.previous_page_number }}{% if selected_filter %}&filter={{ selected_filter }}{% endif %}{% if selected_type %}&type={{ selected_type }}{% endif %}">&lsaquo;</a>
             </li>
           {% endif %}
-    
-          <li class="page-item disabled">
-            <span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        
+          {# Current page #}
+          <li class="page-item-1 number disabled">
+            <span class="page-link-1">{{ page_obj.number }}</span>
           </li>
-    
+        
+          {# Next page arrow #}
           {% if page_obj.has_next %}
-            <li class="page-item">
-              <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+            <li class="page-item-1 icon">
+              <a class="page-link-1" href="?Subscription_page={{ page_obj.next_page_number }}{% if selected_filter %}&filter={{ selected_filter }}{% endif %}{% if selected_type %}&type={{ selected_type }}{% endif %}">&rsaquo;</a>
             </li>
           {% endif %}
+        
+          {# Last page arrow #}
+          {% if page_obj.number < page_obj.paginator.num_pages %}
+            <li class="page-item-1 icon">
+              <a class="page-link-1" href="?Subscription_page={{ page_obj.paginator.num_pages }}{% if selected_filter %}&filter={{ selected_filter }}{% endif %}{% if selected_type %}&type={{ selected_type }}{% endif %}">&raquo;</a>
+            </li>
+          {% endif %}
+        
         </ul>
+        
+      </nav>
+    </div>
+  </div>
+</section>
+<section class="plans subscription-plans general-plans pt-5 pb-5">
+  <h2 class="main-title">General Plans</h2>
+  <div class="container">
+    <div class="row">
+      {% for general_plan in general_plans%}
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="box">
+          <div class="info p-3">
+            <h3 class="subscription-name">{{ general_plan.name }}</h3>
+            <p class="description"><span>Description:</span> {{ general_plan.description }}</p>
+            <p class="detail"><span>Detail:</span> {{ general_plan.detail }}</p>
+            <a href="{% url 'specialists:general_plan_detail' general_plan.id %}" class="btn d-block m-auto mb-2">Details</a>
+            
+          </div>
+        </div>
+      </div>
+      {%endfor%}
+    </div>
+    <div class="mt-4 text-center">
+      <nav>
+        <ul class="pagination justify-content-center align-items-center">
+
+          {# First page arrow #}
+          {% if general_page_obj.number > 1 %}
+            <li class="page-item-1 icon">
+              <a class="page-link-1" href="?general_page=1{% if selected_filter %}&filter={{ selected_filter }}{% endif %}{% if selected_type %}&type={{ selected_type }}{% endif %}">&laquo;</a>
+            </li>
+          {% endif %}
+        
+          {# Previous page arrow #}
+          {% if general_page_obj.has_previous %}
+            <li class="page-item-1 icon">
+              <a class="page-link-1" href="?general_page={{ general_page_obj.previous_page_number }}{% if selected_filter %}&filter={{ selected_filter }}{% endif %}{% if selected_type %}&type={{ selected_type }}{% endif %}">&lsaquo;</a>
+            </li>
+          {% endif %}
+        
+          {# Current page #}
+          <li class="page-item-1 number disabled">
+            <span class="page-link-1">{{ general_page_obj.number }}</span>
+          </li>
+        
+          {# Next page arrow #}
+          {% if general_page_obj.has_next %}
+            <li class="page-item-1 icon">
+              <a class="page-link-1" href="?general_page={{ general_page_obj.next_page_number }}{% if selected_filter %}&filter={{ selected_filter }}{% endif %}{% if selected_type %}&type={{ selected_type }}{% endif %}">&rsaquo;</a>
+            </li>
+          {% endif %}
+        
+          {# Last page arrow #}
+          {% if general_page_obj.number < general_page_obj.paginator.num_pages %}
+            <li class="page-item-1 icon">
+              <a class="page-link-1" href="?general_page={{ page_obj.paginator.num_pages }}{% if selected_filter %}&filter={{ selected_filter }}{% endif %}{% if selected_type %}&type={{ selected_type }}{% endif %}">&raquo;</a>
+            </li>
+          {% endif %}
+        
+        </ul>
+        
       </nav>
     </div>
   </div>
